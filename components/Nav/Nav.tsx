@@ -5,7 +5,7 @@ const Nav = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	return (
-		<nav className='bg-white shadow dark:bg-neutral-900'>
+		<nav className='bg-white shadow dark:bg-neutral-900 fixed z-[100] w-full'>
 			<div className='container px-6 py-4 mx-auto md:flex md:justify-between md:items-center'>
 				<div className='flex items-center justify-between'>
 					<div>
