@@ -9,6 +9,7 @@ const Home: NextPage = () => {
 		<>
 			<Nav />
 			<main>
+				<div id='modal'></div>
 				<Hero />
 				<Categories />
 				<ProductList />
