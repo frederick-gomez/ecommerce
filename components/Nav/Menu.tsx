@@ -9,28 +9,16 @@ const Menu = ({ isOpen }: Props) => {
 	return (
 		<div className={`items-center mt-3 md:mt-0 md:flex ${isOpen ? '' : 'hidden'}`}>
 			<div className='flex flex-col md:flex-row md:mx-6'>
-				<a
-					className='text-center my-1 text-sm font-medium  transition-colors duration-200 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0'
-					href='#'
-				>
+				<a className='text-center my-1 text-sm font-medium md:mx-4 md:my-0 hover-link' href='#'>
 					Home
 				</a>
-				<a
-					className='text-center my-1 text-sm font-medium  transition-colors duration-200 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0'
-					href='#'
-				>
+				<a className='text-center my-1 text-sm font-medium md:mx-4 md:my-0 hover-link' href='#'>
 					Shop
 				</a>
-				<a
-					className='text-center my-1 text-sm font-medium  transition-colors duration-200 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0'
-					href='#'
-				>
+				<a className='text-center my-1 text-sm font-medium md:mx-4 md:my-0 hover-link' href='#'>
 					Contact
 				</a>
-				<a
-					className='text-center my-1 text-sm font-medium  transition-colors duration-200 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0'
-					href='#'
-				>
+				<a className='text-center my-1 text-sm font-medium md:mx-4 md:my-0 hover-link' href='#'>
 					About
 				</a>
 			</div>
@@ -40,10 +28,7 @@ const Menu = ({ isOpen }: Props) => {
 
 				{/* Cart button */}
 				<div className='flex  justify-center md:block md:ml-2'>
-					<a
-						className='flex content-center transition-colors duration-200 transform  hover:text-blue-500 dark:hover:text-blue-400'
-						href='#'
-					>
+					<a className='flex content-center hover-link transform' href='#'>
 						<svg
 							className='w-5 h-5'
 							viewBox='0 0 24 24'

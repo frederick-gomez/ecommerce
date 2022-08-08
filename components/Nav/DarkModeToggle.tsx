@@ -31,7 +31,7 @@ const DarkModeToggle = () => {
 	};
 
 	return (
-		<div className='md:mr-2 transition-colors duration-200 transform hover:text-blue-500 dark:hover:text-blue-400'>
+		<div className='md:mr-2 hover-link transform'>
 			{isDarkMode ? (
 				<button className='flex' onClick={setLightTheme}>
 					<svg

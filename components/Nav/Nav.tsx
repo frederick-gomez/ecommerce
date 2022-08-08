@@ -5,12 +5,12 @@ const Nav = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	return (
-		<nav className='bg-white shadow dark:bg-neutral-900 fixed z-[100] w-full'>
+		<nav className='bg-stone-100 shadow dark:bg-neutral-900 fixed z-[100] w-full'>
 			<div className='container px-6 py-4 mx-auto md:flex md:justify-between md:items-center'>
 				<div className='flex items-center justify-between'>
 					<div>
 						<a
-							className='text-2xl font-bold text-gray-900 dark:text-gray-200 transition-colors duration-200 transform lg:text-3xl hover:text-blue-500 dark:hover:text-blue-400'
+							className='text-2xl font-bold text-gray-900 dark:text-gray-200 transform lg:text-3xl hover-link'
 							href='#'
 						>
 							E-commerce
@@ -22,7 +22,7 @@ const Nav = () => {
 						<button
 							type='button'
 							onClick={() => setIsMenuOpen(!isMenuOpen)}
-							className='text-gray-900 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400'
+							className='hover-link text-gray-900 dark:text-gray-200 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400'
 							aria-label='toggle menu'
 						>
 							<svg viewBox='0 0 24 24' className='w-6 h-6 fill-current'>
