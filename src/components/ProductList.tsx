@@ -7,6 +7,7 @@ import Women1 from '../public/women-1.jpg';
 import Women2 from '../public/women-2.jpg';
 import Women3 from '../public/women-3.jpg';
 import Women4 from '../public/women-4.jpg';
+import { NextResponse } from 'next/server';
 
 const items = [
 	{
@@ -53,7 +54,9 @@ const items = [
 	},
 ];
 
-const ProductList = () => {
+type Props = {};
+
+const ProductList = (props: Props) => {
 	return (
 		<section className='container px-4 mx-auto mb-32 grid gap-x-4 gap-y-14 grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
 			{items.map((item) => (
@@ -70,3 +73,11 @@ const ProductList = () => {
 };
 
 export default ProductList;
+
+export async function getServerSideProps(ctx: NextResponse) {
+	console.log(ctx);
+
+	return {
+		props: {}, // will be passed to the page component as props
+	};
+}
