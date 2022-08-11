@@ -7,7 +7,6 @@ import Women1 from '../public/women-1.jpg';
 import Women2 from '../public/women-2.jpg';
 import Women3 from '../public/women-3.jpg';
 import Women4 from '../public/women-4.jpg';
-import PreviewItem from './PreviewItem';
 
 const items = [
 	{
