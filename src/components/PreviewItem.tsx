@@ -21,9 +21,7 @@ const PreviewItem = (props: Props) => {
 	};
 	const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setQuantity(+e.target.value);
 
-	const addToCartHandler = () => {
-		console.log(+props.price);
-	};
+	const addToCartHandler = () => {};
 
 	return (
 		<>
@@ -76,7 +74,6 @@ const PreviewItem = (props: Props) => {
 					</div>
 				</div>
 			</div>
-			;
 		</>
 	);
 };

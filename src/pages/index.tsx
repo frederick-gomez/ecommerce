@@ -1,6 +1,5 @@
 import Categories from '../components/Categories';
 import Hero from '../components/Hero';
-import Nav from '../components/Nav/Nav';
 import ProductList from '../components/ProductList';
 import { GetStaticProps } from 'next';
 import { prisma } from '../db/prisma';
@@ -42,18 +41,12 @@ const Home = ({ products }: Props) => {
 		price: formatNumber(product.price),
 	}));
 
-	console.log(modifiedProducts);
-
 	return (
-		<>
-			<Nav />
-			<main>
-				<div id='modal'></div>
-				<Hero />
-				<Categories />
-				<ProductList products={modifiedProducts} />
-			</main>
-		</>
+		<main>
+			<Hero />
+			<Categories />
+			<ProductList products={modifiedProducts} />
+		</main>
 	);
 };
 
