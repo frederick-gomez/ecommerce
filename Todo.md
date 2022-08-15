@@ -1,7 +1,7 @@
 # TODO
 
-- [ ] Prevent wrapping product title in grid
+- [x] Prevent wrapping product title in grid
 - [ ] Add product price and display formated price
-- [ ] Pass or fetch data to cart
-- [ ] Remove redux
-- [ ] Add auth
+- [ ] Handle cart items
+- [x] Remove redux
+- [x] Add basic auth
