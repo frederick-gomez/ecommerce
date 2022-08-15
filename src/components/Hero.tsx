@@ -1,6 +1,6 @@
 import React from 'react';
 import ArrowRight from './icons/ArrowRight';
-import HeroImage from '../public/hero-pic-1.jpg';
+import HeroImage from '../../public/hero-pic-1.jpg';
 import Image from 'next/image';
 
 const Hero = () => {

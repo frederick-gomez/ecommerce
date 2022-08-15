@@ -1,6 +1,6 @@
 import React, { useRef, useState, ChangeEvent } from 'react';
 import Image from 'next/image';
-import Men1 from '../../public/men-3.jpg';
+import Men1 from '../../../public/men-3.jpg';
 import MinusSVG from '../icons/MinusSVG';
 import PlusSVG from '../icons/PlusSVG';
 import TrashSVG from '../icons/TrashSVG';

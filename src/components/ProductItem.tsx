@@ -31,8 +31,10 @@ const ProductItem = (props: productType) => {
 						className='hover:scale-105 duration-500 transition-all'
 					/>
 				</div>
-				<p className='font-semibold text-lg mt-2 text-ellipsis'>{props.title}</p>
-				<p className='text-sm py-1'>{props.category}</p>
+				<p className='font-semibold text-lg mt-2 capitalize text-ellipsis whitespace-nowrap'>
+					{props.title}
+				</p>
+				<p className='text-sm py-1 capitalize'>{props.category}</p>
 				<p className=''>{props.price}</p>
 				<button className='flex items-center mt-2 py-3 px-6 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 border-solid border border-black uppercase dark:border-white'>
 					Agregar <CartSVG className='ml-2' />

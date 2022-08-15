@@ -1,7 +1,7 @@
 import Categories from '../components/Categories';
 import Hero from '../components/Hero';
 import ProductList from '../components/ProductList';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { prisma } from '../db/prisma';
 
 type Props = {
@@ -15,13 +15,13 @@ type Props = {
 	}[];
 };
 
-function capítalizeString(text: string) {
-	const capitalizedString = text
-		.trim()
-		.toLowerCase()
-		.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase()));
-	return capitalizedString;
-}
+// function capítalizeString(text: string) {
+// 	const capitalizedString = text
+// 		.trim()
+// 		.toLowerCase()
+// 		.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase()));
+// 	return capitalizedString;
+// }
 
 function formatNumber(num: number) {
 	return new Intl.NumberFormat('es-PY', {
@@ -34,10 +34,10 @@ function formatNumber(num: number) {
 const Home = ({ products }: Props) => {
 	const modifiedProducts = products.map((product) => ({
 		id: product.id,
-		title: capítalizeString(product.title),
-		category: capítalizeString(product.category),
+		title: product.title,
+		category: product.category,
 		imageUrl: product.imageUrl,
-		vendor: capítalizeString(product.vendor!),
+		vendor: product.vendor,
 		price: formatNumber(product.price),
 	}));
 
@@ -52,7 +52,8 @@ const Home = ({ products }: Props) => {
 
 export default Home;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+	res.setHeader('Cache-Control', 'public, s-maxage=43200, stale-while-revalidate=59');
 	const products = await prisma.products.findMany();
 
 	return {

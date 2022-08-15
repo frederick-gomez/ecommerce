@@ -1,7 +1,7 @@
 import React from 'react';
 import CategoryCard from './CategoryCard';
-import MenFashion from '../public/mens-clothes.jpg';
-import WomenFashion from '../public/women-clothes.jpg';
+import MenFashion from '../../public/mens-clothes.jpg';
+import WomenFashion from '../../public/women-clothes.jpg';
 import Link from 'next/link';
 
 const Categories = () => {
