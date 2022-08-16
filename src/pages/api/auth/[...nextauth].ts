@@ -14,4 +14,9 @@ export default NextAuth({
 			clientSecret: process.env.GITHUB_SECRET!,
 		}),
 	],
+	pages: {
+		signIn: '/auth/signin',
+		// error: '/error', // Error code passed in query string as ?error=
+		newUser: '/', // New users will be directed here on first sign in (leave the property out if not of interest)
+	},
 });
