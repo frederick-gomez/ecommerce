@@ -12,6 +12,20 @@ const ProductItem = (props: productType) => {
 	const openPreviewModal = () => setIsPreviewOpen(true);
 	const closePreviewModal = () => setIsPreviewOpen(false);
 
+	const addToCartHandler = async (id: String) => {
+		const response = await fetch('http://localhost:3000/api/add-to-cart', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				id,
+			}),
+		});
+		const data = await response.json();
+		console.log(data);
+	};
+
 	return (
 		<>
 			<div className='flex flex-col items-center justify-center relative'>
@@ -36,7 +50,10 @@ const ProductItem = (props: productType) => {
 				</p>
 				<p className='text-sm py-1 capitalize'>{props.category}</p>
 				<p className=''>{props.price}</p>
-				<button className='flex items-center mt-2 py-3 px-6 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 border-solid border border-black uppercase dark:border-white'>
+				<button
+					onClick={() => addToCartHandler(props.id)}
+					className='flex items-center mt-2 py-3 px-6 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 border-solid border border-black uppercase dark:border-white'
+				>
 					Agregar <CartSVG className='ml-2' />
 				</button>
 			</div>
