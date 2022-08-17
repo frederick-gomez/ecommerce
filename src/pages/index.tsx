@@ -1,7 +1,7 @@
 import Categories from '../components/Categories';
 import Hero from '../components/Hero';
 import ProductList from '../components/ProductList';
-import type { GetServerSideProps } from 'next';
+import type { GetStaticProps } from 'next';
 import { prisma } from '../db/prisma';
 
 type Props = {
@@ -44,13 +44,14 @@ const Home = ({ products }: Props) => {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	ctx.res.setHeader('Cache-Control', 'public, s-maxage=43200, stale-while-revalidate=59');
+export const getStaticProps: GetStaticProps = async () => {
 	const products = await prisma.products.findMany();
 
 	return {
 		props: {
 			products,
 		},
+		//Cache for 1 day
+		revalidate: 86400,
 	};
 };
