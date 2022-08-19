@@ -7,7 +7,6 @@ const prisma = new PrismaClient();
 
 export const authOptions: NextAuthOptions = {
 	adapter: PrismaAdapter(prisma),
-	debug: true,
 	providers: [
 		GitHubProvider({
 			clientId: process.env.GITHUB_ID!,
@@ -24,6 +23,14 @@ export const authOptions: NextAuthOptions = {
 		maxAge: 5 * 24 * 60 * 60, // 30 days
 		// Seconds - Throttle how frequently to write to database to extend a session.
 		updateAge: 24 * 60 * 60, // 24 hours
+	},
+	callbacks: {
+		session: async ({ session, user }) => {
+			if (session?.user) {
+				session.user.id = user.id;
+			}
+			return session;
+		},
 	},
 };
 

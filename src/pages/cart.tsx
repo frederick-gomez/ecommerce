@@ -15,8 +15,6 @@ const Cart = (props: Props) => {
 	const { data: session } = useSession();
 	const router = useRouter();
 
-	console.log(session);
-
 	if (typeof window === 'undefined') return null;
 
 	if (!session) router.replace('/auth/signin');
