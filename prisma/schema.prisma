@@ -30,6 +30,10 @@ model ProductsInCart {
 model Cart {
   id            String    @id @default(cuid())
   products      ProductsInCart[]
+  user          User?
+  userId        String
+
+  @@unique([userId])
 }
 
 model Account {
@@ -67,6 +71,10 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  cartId        String?
+  cart          Cart?    @relation(fields: [cartId], references: [id])
+
+  @@unique([cartId])
 }
 
 model VerificationToken {
