@@ -1,6 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from '../db/prisma';
 
 export default async function createOrUpdateCart(id: string) {
 	const cartOfUser = await prisma.cart.findUnique({
