@@ -1,5 +1,6 @@
 import Categories from '../components/Categories';
 import Hero from '../components/Hero';
+import formatPriceTag from '../utils/formatPriceTag';
 import ProductList from '../components/ProductList';
 import type { GetStaticProps } from 'next';
 import { prisma } from '../db/prisma';
@@ -15,14 +16,6 @@ type Props = {
 	}[];
 };
 
-function formatNumber(num: number) {
-	return new Intl.NumberFormat('es-PY', {
-		style: 'currency',
-		currency: 'PYG',
-		currencyDisplay: 'narrowSymbol',
-	}).format(num);
-}
-
 const Home = ({ products }: Props) => {
 	const modifiedProducts = products.map((product) => ({
 		id: product.id,
@@ -30,7 +23,7 @@ const Home = ({ products }: Props) => {
 		category: product.category,
 		imageUrl: product.imageUrl,
 		vendor: product.vendor,
-		price: formatNumber(product.price),
+		price: formatPriceTag(product.price),
 	}));
 
 	return (

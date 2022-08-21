@@ -1,3 +1,5 @@
+// import { Prisma } from '@prisma/client'
+
 export type productType = {
 	id: string;
 	title: string;
@@ -6,3 +8,7 @@ export type productType = {
 	vendor: string;
 	price: string;
 };
+
+// export const cartItem = Prisma.validator<Prisma.UserSelect>()({
+
+// });
