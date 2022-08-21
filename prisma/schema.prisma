@@ -16,22 +16,26 @@ model Product {
   price         Int
   imageUrl      String @db.VarChar(1000)
   category      String
-  cart          ProductsInCart[]
+  cart          CartItem[]
 }
 
-model ProductsInCart {
-  product Product @relation(fields: [productId], references: [id])
+model CartItem {
+  createdAt DateTime  @default(now())
+  amount    Int       
+  product   Product   @relation(fields: [productId], references: [id])
   productId String
-  cart Cart @relation(fields: [cartId], references: [id])
-  cartId String
-  @@id([cartId, productId])
+  cart      Cart      @relation(fields: [cartId], references: [id])
+  cartId    String
+
+  @@id([productId, cartId])
 }
 
 model Cart {
   id            String    @id @default(cuid())
-  products      ProductsInCart[]
   user          User?
   userId        String
+  items         CartItem[]
+  createdAt     DateTime  @default(now())
 
   @@unique([userId])
 }
@@ -71,10 +75,9 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  cartId        String?
+  cartId        String?  @unique
   cart          Cart?    @relation(fields: [cartId], references: [id])
 
-  @@unique([cartId])
 }
 
 model VerificationToken {
