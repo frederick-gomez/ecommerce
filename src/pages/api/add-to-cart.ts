@@ -45,7 +45,7 @@ export default async function addToCartHandler(req: NextApiRequest, res: NextApi
 				},
 			},
 		});
-		res.status(200).json({ message: 'item added to cart', productId: productId, cartId: cart });
+		res.status(200).json({ message: 'item added to cart' });
 	} catch (error) {
 		res.status(500).json({ message: 'failed to add product to cart', error });
 	}

@@ -29,6 +29,19 @@ const CartItem = ({ product }: Props) => {
 
 	const addToCartHandler = () => {};
 
+	const removeFromCart = async (productId: string) => {
+		const response = await fetch('http://localhost:3000/api/delete-from-cart', {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				id: productId,
+			}),
+		});
+		await response.json();
+	};
+
 	return (
 		<div className='mb-4  flex p-2'>
 			<div className='relative h-[150px] w-[150px]'>
@@ -55,7 +68,10 @@ const CartItem = ({ product }: Props) => {
 							<PlusSVG />
 						</button>
 					</div>
-					<button className='transition-all duration-200 hover:text-red-500'>
+					<button
+						onClick={() => removeFromCart(product.id)}
+						className='transition-all duration-200 hover:text-red-500'
+					>
 						<TrashSVG />
 					</button>
 				</div>

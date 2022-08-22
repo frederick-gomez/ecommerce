@@ -16,8 +16,7 @@ const AddToCartBtn = ({ productId }: Props) => {
 				id,
 			}),
 		});
-		const data = await response.json();
-		console.log(data);
+		await response.json();
 	};
 
 	return (
