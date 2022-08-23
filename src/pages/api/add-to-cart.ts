@@ -6,47 +6,46 @@ import { prisma } from '../../db/prisma';
 
 export default async function addToCartHandler(req: NextApiRequest, res: NextApiResponse) {
 	const session = await unstable_getServerSession(req, res, authOptions);
-	const userId = session?.user?.id;
 	const productId: string = req.body.id;
-
-	if (!session) {
-		res.status(401).json({ message: 'user has to be log in to add a product to the cart' });
-	}
 
 	if (!req.body.id) {
 		res.status(400).json({ message: 'please provide a valid id' });
 	}
 
-	try {
-		const cart = await createOrUpdateCart(userId!);
-		await prisma.cart.update({
-			where: { id: cart.id },
-			data: {
-				items: {
-					upsert: {
-						where: {
-							productId_cartId: {
-								productId: productId,
-								cartId: cart.id,
+	if (session) {
+		try {
+			const cart = await createOrUpdateCart(session.user!.id);
+			await prisma.cart.update({
+				where: { id: cart.id },
+				data: {
+					items: {
+						upsert: {
+							where: {
+								productId_cartId: {
+									productId: productId,
+									cartId: cart.id,
+								},
 							},
-						},
-						update: {
-							amount: { increment: 1 },
-						},
-						create: {
-							amount: 1,
-							product: {
-								connect: {
-									id: productId,
+							update: {
+								amount: { increment: 1 },
+							},
+							create: {
+								amount: 1,
+								product: {
+									connect: {
+										id: productId,
+									},
 								},
 							},
 						},
 					},
 				},
-			},
-		});
-		res.status(200).json({ message: 'item added to cart' });
-	} catch (error) {
-		res.status(500).json({ message: 'failed to add product to cart', error });
+			});
+			res.status(200).json({ message: 'item added to cart' });
+		} catch (error) {
+			res.status(500).json({ message: 'failed to add product to cart', error });
+		}
+	} else {
+		res.status(401).json({ message: 'user has to be log in to add a product to the cart' });
 	}
 }
