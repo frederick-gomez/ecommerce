@@ -1,6 +1,4 @@
-import React from 'react';
 import CartSVG from './icons/CartSVG';
-
 type Props = {
 	productId: String;
 };

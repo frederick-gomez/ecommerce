@@ -6,7 +6,7 @@ export default function LoginBtn() {
 	const { data: session } = useSession();
 	if (session) {
 		return (
-			<button className={btnClasses} onClick={() => signOut()}>
+			<button className={btnClasses} onClick={() => signOut({ callbackUrl: '/' })}>
 				Sign out
 			</button>
 		);
