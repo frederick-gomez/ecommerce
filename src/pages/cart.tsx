@@ -41,9 +41,14 @@ const CartPage = ({ cart }: Props) => {
 
 	if (status === 'loading') {
 		return (
-			<div className='page-container flex h-screen items-center justify-center'>
-				<LoadingSVG />
-			</div>
+			<>
+				<Head>
+					<title>Carrito</title>
+				</Head>
+				<div className='page-container flex h-screen items-center justify-center'>
+					<LoadingSVG />
+				</div>
+			</>
 		);
 	}
 
