@@ -1,14 +1,11 @@
 import CartItem from '../components/Cart/CartItem';
 import formatPriceTag from '../utils/formatPriceTag';
 import { GetServerSideProps } from 'next';
-import { useSession } from 'next-auth/react';
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from './api/auth/[...nextauth]';
-import { useRouter } from 'next/router';
 import { prisma } from '../db/prisma';
 import Head from 'next/head';
 import createOrUpdateCart from '../lib/create-update-cart';
-import LoadingSVG from '../components/icons/LoadingSVG';
 
 type Props = {
 	cart: {
@@ -31,27 +28,6 @@ const buttonClasses =
 	'py-3 px-6 mt-4 bg-black text-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white hover:bg-white hover:text-black transition-all duration-500 uppercase border dark:border-white border-black';
 
 const CartPage = ({ cart }: Props) => {
-	const router = useRouter();
-	const { status } = useSession({
-		required: true,
-		onUnauthenticated() {
-			router.replace('/auth/signin');
-		},
-	});
-
-	if (status === 'loading') {
-		return (
-			<>
-				<Head>
-					<title>Carrito</title>
-				</Head>
-				<div className='page-container flex h-screen items-center justify-center'>
-					<LoadingSVG />
-				</div>
-			</>
-		);
-	}
-
 	const { items, _count } = cart;
 
 	let totalPrice = 0;
@@ -120,9 +96,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 				cart: cart,
 			},
 		};
+	} else {
+		return {
+			redirect: {
+				destination: '/auth/signin',
+				permanent: false,
+			},
+		};
 	}
-
-	return {
-		props: {},
-	};
 };
