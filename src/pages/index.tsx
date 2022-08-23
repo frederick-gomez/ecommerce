@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Categories from '../components/Categories';
 import Hero from '../components/Hero';
 import formatPriceTag from '../utils/formatPriceTag';
@@ -27,18 +28,26 @@ const Home = ({ products }: Props) => {
 	}));
 
 	return (
-		<main>
-			<Hero />
-			<Categories />
-			<ProductList products={modifiedProducts} />
-		</main>
+		<>
+			<Head>
+				<title>E-commerce</title>
+				<meta name='viewport' content='initial-scale=1.0, width=device-width' />
+			</Head>
+			<main>
+				<Hero />
+				<Categories />
+				<ProductList products={modifiedProducts} />
+			</main>
+		</>
 	);
 };
 
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-	const products = await prisma.product.findMany();
+	const products = await prisma.product.findMany({
+		take: 12,
+	});
 
 	return {
 		props: {
