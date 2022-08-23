@@ -24,3 +24,7 @@ input[type='number'] {
 .hover-link {
 	@apply transition-all duration-300 hover:text-blue-500 dark:hover:text-blue-400;
 }
+
+.page-container {
+	@apply container mx-auto px-4 pt-16;
+}

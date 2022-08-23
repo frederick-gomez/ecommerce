@@ -62,7 +62,7 @@ const CartItem = ({ product }: Props) => {
 							value={quantity}
 							onChange={inputChangeHandler}
 							type='number'
-							className='w-16 bg-neutral-200 text-center dark:bg-neutral-800'
+							className='w-16 bg-neutral-200 py-1 text-center dark:bg-neutral-800'
 						/>
 						<button className='absolute right-0 h-full pr-3' onClick={addOne}>
 							<PlusSVG />

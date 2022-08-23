@@ -46,8 +46,8 @@ const CartPage = ({ cart }: Props) => {
 	}
 
 	return (
-		<div className='container mx-auto px-4 pt-16'>
-			<div className='mt-4 md:py-20'>
+		<div className='page-container min-h-[700px] py-16'>
+			<div className='mt-4 md:py-10'>
 				<h1 className='text-3xl font-semibold'>Mi Carrito</h1>
 				<span>{_count.items} articulos añadidos</span>
 			</div>

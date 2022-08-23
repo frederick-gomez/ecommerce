@@ -6,25 +6,34 @@ import LoginBtn from './LoginBtn';
 
 type Props = {
 	isOpen: boolean;
+	closeMenu: () => void;
 };
 
 const linkClasses = 'text-center my-1 text-sm font-medium md:mx-4 md:my-0 hover-link';
 
-const Menu = ({ isOpen }: Props) => {
+const Menu = ({ isOpen, closeMenu }: Props) => {
 	return (
 		<div className={`mt-3 items-center md:mt-0 md:flex ${isOpen ? '' : 'hidden'}`}>
 			<div className='flex flex-col md:mx-6 md:flex-row'>
 				<Link href='/'>
-					<a className={linkClasses}>Home</a>
+					<a onClick={closeMenu} className={linkClasses}>
+						Inicio
+					</a>
 				</Link>
 				<Link href='/shop'>
-					<a className={linkClasses}>Shop</a>
+					<a onClick={closeMenu} className={linkClasses}>
+						Tienda
+					</a>
 				</Link>
 				<Link href='/contact'>
-					<a className={linkClasses}>Contact</a>
+					<a onClick={closeMenu} className={linkClasses}>
+						Contacto
+					</a>
 				</Link>
 				<Link href='/about'>
-					<a className={linkClasses}>About</a>
+					<a onClick={closeMenu} className={linkClasses}>
+						La Empresa
+					</a>
 				</Link>
 				<LoginBtn />
 			</div>
@@ -35,7 +44,7 @@ const Menu = ({ isOpen }: Props) => {
 				{/* Cart button */}
 				<div className='flex  justify-center md:ml-2 md:block'>
 					<Link href='/cart'>
-						<a className='hover-link flex transform content-center' href='#'>
+						<a onClick={closeMenu} className='hover-link flex transform content-center' href='#'>
 							<CartSVG />
 						</a>
 					</Link>

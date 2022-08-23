@@ -5,7 +5,7 @@ type Props = {};
 
 const AboutPage = (props: Props) => {
 	return (
-		<section className='container mx-auto px-4 pt-16'>
+		<section className='page-container pb-16'>
 			<div className='md: items-center py-6 md:flex'>
 				<div className='md:basis-1/2 md:px-6'>
 					<h1 className='py-2 text-xl font-semibold'>Sobre Nosotros</h1>
