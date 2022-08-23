@@ -12,30 +12,30 @@ const linkClasses = 'text-center my-1 text-sm font-medium md:mx-4 md:my-0 hover-
 
 const Menu = ({ isOpen }: Props) => {
 	return (
-		<div className={`items-center mt-3 md:mt-0 md:flex ${isOpen ? '' : 'hidden'}`}>
-			<div className='flex flex-col md:flex-row md:mx-6'>
+		<div className={`mt-3 items-center md:mt-0 md:flex ${isOpen ? '' : 'hidden'}`}>
+			<div className='flex flex-col md:mx-6 md:flex-row'>
 				<Link href='/'>
 					<a className={linkClasses}>Home</a>
 				</Link>
-				<a className={linkClasses} href='#'>
-					Shop
-				</a>
-				<a className={linkClasses} href='#'>
-					Contact
-				</a>
-				<a className={linkClasses} href='#'>
-					About
-				</a>
+				<Link href='/shop'>
+					<a className={linkClasses}>Shop</a>
+				</Link>
+				<Link href='/contact'>
+					<a className={linkClasses}>Contact</a>
+				</Link>
+				<Link href='/about'>
+					<a className={linkClasses}>About</a>
+				</Link>
 				<LoginBtn />
 			</div>
 
-			<div className='flex justify-evenly mt-1 md:mt-0'>
+			<div className='mt-1 flex justify-evenly md:mt-0'>
 				<DarkModeToggle />
 
 				{/* Cart button */}
-				<div className='flex  justify-center md:block md:ml-2'>
+				<div className='flex  justify-center md:ml-2 md:block'>
 					<Link href='/cart'>
-						<a className='flex content-center hover-link transform' href='#'>
+						<a className='hover-link flex transform content-center' href='#'>
 							<CartSVG />
 						</a>
 					</Link>

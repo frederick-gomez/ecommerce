@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CartItem from '../components/Cart/CartItem';
 import formatPriceTag from '../utils/formatPriceTag';
 import { GetServerSideProps } from 'next';
@@ -28,19 +28,22 @@ type Props = {
 const buttonClasses =
 	'py-3 px-6 mt-4 bg-black text-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white hover:bg-white hover:text-black transition-all duration-500 uppercase border dark:border-white border-black';
 
-const Cart = ({ cart }: Props) => {
+const CartPage = ({ cart }: Props) => {
 	const { data: session } = useSession();
 	const router = useRouter();
+
+	useEffect(() => {
+		if (!session) {
+			router.replace('/auth/signin');
+		}
+	}, []);
+
 	const { items, _count } = cart;
 
 	let totalPrice = 0;
 	for (let i = 0; i < items.length; i++) {
 		totalPrice = totalPrice + items[i].product.price;
 	}
-
-	if (typeof window === 'undefined') return null;
-
-	if (!session) router.replace('/auth/signin');
 
 	return (
 		<div className='container mx-auto px-4 pt-16'>
@@ -67,27 +70,33 @@ const Cart = ({ cart }: Props) => {
 	);
 };
 
-export default Cart;
+export default CartPage;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	const session = await unstable_getServerSession(ctx.req, ctx.res, authOptions);
-	const userId = session?.user?.id;
 
-	const cart = await prisma.cart.findUnique({
-		where: { userId: userId },
-		select: {
-			items: {
-				select: {
-					product: true,
+	if (session) {
+		const userId = session.user!.id;
+		const cart = await prisma.cart.findUnique({
+			where: { userId: userId },
+			select: {
+				items: {
+					select: {
+						product: true,
+					},
 				},
+				_count: true,
 			},
-			_count: true,
-		},
-	});
+		});
+
+		return {
+			props: {
+				cart: cart,
+			},
+		};
+	}
 
 	return {
-		props: {
-			cart: cart,
-		},
+		props: {},
 	};
 };
