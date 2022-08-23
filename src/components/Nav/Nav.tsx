@@ -17,7 +17,7 @@ const Nav = () => {
 								className='hover-link transform text-2xl font-bold text-gray-900 dark:text-gray-200 lg:text-3xl'
 								href='#'
 							>
-								E-commerce
+								Flame Shop
 							</a>
 						</Link>
 					</div>
