@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import CartItem from '../components/Cart/CartItem';
 import formatPriceTag from '../utils/formatPriceTag';
 import { GetServerSideProps } from 'next';
@@ -8,6 +7,8 @@ import { authOptions } from './api/auth/[...nextauth]';
 import { useRouter } from 'next/router';
 import { prisma } from '../db/prisma';
 import Head from 'next/head';
+import createOrUpdateCart from '../lib/create-update-cart';
+import LoadingSVG from '../components/icons/LoadingSVG';
 
 type Props = {
 	cart: {
@@ -30,14 +31,21 @@ const buttonClasses =
 	'py-3 px-6 mt-4 bg-black text-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white hover:bg-white hover:text-black transition-all duration-500 uppercase border dark:border-white border-black';
 
 const CartPage = ({ cart }: Props) => {
-	const { data: session } = useSession();
 	const router = useRouter();
-
-	useEffect(() => {
-		if (!session) {
+	const { status } = useSession({
+		required: true,
+		onUnauthenticated() {
 			router.replace('/auth/signin');
-		}
-	}, []);
+		},
+	});
+
+	if (status === 'loading') {
+		return (
+			<div className='page-container flex h-screen items-center justify-center'>
+				<LoadingSVG />
+			</div>
+		);
+	}
 
 	const { items, _count } = cart;
 
@@ -89,8 +97,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 	if (session) {
 		const userId = session.user!.id;
+		const cartId = await createOrUpdateCart(userId);
 		const cart = await prisma.cart.findUnique({
-			where: { userId: userId },
+			where: { id: cartId.id },
 			select: {
 				items: {
 					select: {
@@ -109,11 +118,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	}
 
 	return {
-		props: {
-			cart: {
-				items: {},
-				_count: { items: 0 },
-			},
-		},
+		props: {},
 	};
 };

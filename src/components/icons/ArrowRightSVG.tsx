@@ -4,7 +4,7 @@ type Props = {
 	className?: string;
 };
 
-const ArrowRight = ({ className }: Props) => {
+const ArrowRightSVG = ({ className }: Props) => {
 	return (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
@@ -19,4 +19,4 @@ const ArrowRight = ({ className }: Props) => {
 	);
 };
 
-export default ArrowRight;
+export default ArrowRightSVG;
