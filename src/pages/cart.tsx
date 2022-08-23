@@ -47,25 +47,31 @@ const CartPage = ({ cart }: Props) => {
 
 	return (
 		<div className='container mx-auto px-4 pt-16'>
-			<div className='mt-4 py-6 md:ml-4'>
+			<div className='mt-4 md:py-20'>
 				<h1 className='text-3xl font-semibold'>Mi Carrito</h1>
 				<span>{_count.items} articulos añadidos</span>
 			</div>
-			<div className='md:flex md:items-end md:justify-evenly'>
-				<div className='mt-4 py-6 '>
-					{items.map((item) => (
-						<CartItem product={item.product} key={item.product.id} />
-					))}
+			{_count.items === 0 ? (
+				<div>
+					<h1 className='py-6 text-center text-lg'>Tu carrito esta vacío</h1>
 				</div>
-				<div className='pb-6 text-right'>
-					<h1 className='mb-2 text-2xl font-semibold'>Resumen</h1>
-					<p className='py-1'>
-						Total: <span className='text-xl font-semibold'>{formatPriceTag(totalPrice)}</span>
-					</p>
-					<p className='text-sm'>* El costo de envío se calcula al checkout</p>
-					<button className={buttonClasses}>Siguiente</button>
+			) : (
+				<div className='md:flex md:items-end md:justify-evenly'>
+					<div className='mt-4 py-6 '>
+						{items.map((item) => (
+							<CartItem product={item.product} key={item.product.id} />
+						))}
+					</div>
+					<div className='pb-6 text-right'>
+						<h1 className='mb-2 text-2xl font-semibold'>Resumen</h1>
+						<p className='py-1'>
+							Total: <span className='text-xl font-semibold'>{formatPriceTag(totalPrice)}</span>
+						</p>
+						<p className='text-sm'>* El costo de envío se calcula al checkout</p>
+						<button className={buttonClasses}>Siguiente</button>
+					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 };
@@ -97,6 +103,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 	}
 
 	return {
-		props: {},
+		props: {
+			cart: {
+				items: {},
+				_count: { items: 0 },
+			},
+		},
 	};
 };

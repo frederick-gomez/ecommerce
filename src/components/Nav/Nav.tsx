@@ -6,7 +6,7 @@ const Nav = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	return (
-		<nav className='fixed z-[100] w-full bg-stone-100 shadow dark:bg-neutral-900'>
+		<nav className='fixed z-[100] w-full bg-stone-100 shadow dark:bg-black'>
 			<div className='container mx-auto px-6 py-4 md:flex md:items-center md:justify-between'>
 				<div className='flex items-center justify-between'>
 					<div>

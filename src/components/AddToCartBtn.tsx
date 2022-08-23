@@ -20,7 +20,7 @@ const AddToCartBtn = ({ productId }: Props) => {
 	return (
 		<button
 			onClick={() => addToCartHandler(productId)}
-			className='mt-2 flex items-center border border-solid border-black py-3 px-6 uppercase transition-all duration-300 hover:bg-black hover:text-white dark:border-white dark:hover:bg-white dark:hover:text-black'
+			className='flex items-center self-center border border-solid border-black py-3 px-6 uppercase transition-all duration-300 hover:bg-black hover:text-white dark:border-white dark:hover:bg-white dark:hover:text-black'
 		>
 			Agregar <CartSVG className='ml-2' />
 		</button>

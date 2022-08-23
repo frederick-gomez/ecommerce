@@ -14,7 +14,7 @@ const ProductItem = (props: productType) => {
 
 	return (
 		<>
-			<div className='relative flex flex-col items-center justify-center'>
+			<div className='relative flex flex-col justify-center text-center'>
 				<div className='absolute top-2 right-2 z-10'>
 					<button
 						onClick={openPreviewModal}
@@ -23,7 +23,7 @@ const ProductItem = (props: productType) => {
 						<ExpandSVG />
 					</button>
 				</div>
-				<div className='relative h-[350px] w-full md:h-[350px]'>
+				<div className='relative h-[350px] w-full md:h-[450px]'>
 					<Image
 						src={props.imageUrl}
 						layout='fill'
@@ -31,11 +31,9 @@ const ProductItem = (props: productType) => {
 						className='transition-all duration-500 hover:scale-105'
 					/>
 				</div>
-				<p className='mt-2 text-ellipsis whitespace-nowrap text-lg font-semibold capitalize'>
-					{props.title}
-				</p>
+				<p className='mt-2 truncate text-lg font-semibold capitalize'>{props.title}</p>
 				<p className='py-1 text-sm capitalize'>{props.category}</p>
-				<p className=''>{props.price}</p>
+				<p className='pb-2'>{props.price}</p>
 				<AddToCartBtn productId={props.id} />
 			</div>
 			{isPreviewOpen &&
