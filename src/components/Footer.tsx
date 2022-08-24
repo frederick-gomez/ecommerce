@@ -1,3 +1,4 @@
+import BrandSVG from './icons/BrandSVG';
 import LocationSVG from './icons/LocationSVG';
 import MailSVG from './icons/MailSVG';
 import PhoneSVG from './icons/PhoneSVG';
@@ -8,7 +9,10 @@ const Footer = () => {
 			<div className='bg-stone-100 p-10 dark:bg-black'>
 				<div className='mx-auto md:flex md:max-w-[70%] md:justify-center'>
 					<div className='max-w-sm pb-4 md:py-0 md:px-6'>
-						<h2 className='mb-2 text-lg font-semibold'>Flame Shop</h2>
+						<div className='mb-2 flex items-center'>
+							<h2 className='whitespace-nowrap text-lg font-semibold'>Flame Shop</h2>
+							<BrandSVG className='ml-2 w-10' />
+						</div>
 						<p className='min-w-[200px] text-sm'>
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo voluptas cupiditate sint
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Et mollitia error commodi id?

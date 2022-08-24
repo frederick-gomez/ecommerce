@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
+import BrandSVG from '../icons/BrandSVG';
 import Menu from './Menu';
 
 const Nav = () => {
@@ -17,7 +18,10 @@ const Nav = () => {
 								className='hover-link transform text-2xl font-bold text-gray-900 dark:text-gray-200 lg:text-3xl'
 								href='#'
 							>
-								Flame Shop
+								<div className='flex items-center'>
+									<h1 className='whitespace-nowrap'>Flame Shop</h1>
+									<BrandSVG className='ml-2 w-10' />
+								</div>
 							</a>
 						</Link>
 					</div>

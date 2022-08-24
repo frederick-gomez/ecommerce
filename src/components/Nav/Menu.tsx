@@ -14,7 +14,7 @@ const linkClasses = 'text-center my-1 text-sm font-medium md:mx-4 md:my-0 hover-
 const Menu = ({ isOpen, closeMenu }: Props) => {
 	return (
 		<div className={`mt-3 items-center md:mt-0 md:flex ${isOpen ? '' : 'hidden'}`}>
-			<div className='flex flex-col md:mx-6 md:flex-row'>
+			<div className='flex flex-col md:mx-2 md:flex-row'>
 				<Link href='/'>
 					<a onClick={closeMenu} className={linkClasses}>
 						Inicio
