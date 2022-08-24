@@ -1,5 +1,5 @@
 import React from 'react';
-import ArrowRightSVG from './icons/ArrowRightSVG';
+import ChevronRightSVG from './icons/ChevronRightSVG';
 import HeroImage from '../../public/hero-pic-1.jpg';
 import Image from 'next/image';
 
@@ -15,11 +15,11 @@ const Hero = () => {
 				<div className='flex'>
 					<button className='mx-2 ml-0 flex items-center bg-black py-3 px-6 uppercase transition-all duration-500 hover:bg-white hover:text-black'>
 						Hombres
-						<ArrowRightSVG className='ml-1' />
+						<ChevronRightSVG className='ml-1' />
 					</button>
 					<button className='mx-2 flex items-center bg-black py-3 px-6 uppercase transition-all duration-500 hover:bg-white hover:text-black'>
 						Mujeres
-						<ArrowRightSVG className='ml-1' />
+						<ChevronRightSVG className='ml-1' />
 					</button>
 				</div>
 			</div>

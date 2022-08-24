@@ -12,6 +12,7 @@ type Props = {
 		id: string;
 		_count: { items: number };
 		items: {
+			amount: number;
 			product: {
 				title: string;
 				price: number;
@@ -53,7 +54,12 @@ const CartPage = ({ cart }: Props) => {
 					<div className='md:flex md:items-end md:justify-evenly'>
 						<div className='mt-4 py-6 '>
 							{items.map((item) => (
-								<CartItem product={item.product} key={item.product.id} />
+								<CartItem
+									product={item.product}
+									cartId={cart.id}
+									amount={item.amount}
+									key={item.product.id}
+								/>
 							))}
 						</div>
 						<div className='pb-6 text-right'>
@@ -84,6 +90,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 			select: {
 				items: {
 					select: {
+						amount: true,
 						product: true,
 					},
 				},
@@ -93,7 +100,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 		return {
 			props: {
-				cart: cart,
+				cart: {
+					...cartId,
+					...cart,
+				},
 			},
 		};
 	} else {

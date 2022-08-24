@@ -4,21 +4,28 @@
 @tailwind utilities;
 
 body {
-	@apply text-neutral-900;
-	@apply dark:text-gray-200;
-	@apply dark:bg-black;
-	@apply overflow-x-hidden;
+	@apply overflow-x-hidden 
+	text-neutral-900 
+	dark:bg-black 
+	dark:text-neutral-200;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-	-webkit-appearance: none;
+select {
+	background-color: transparent;
+	border: none;
 	margin: 0;
+	width: 100%;
+	font-family: inherit;
+	font-size: inherit;
+	cursor: pointer;
+	line-height: inherit;
 }
 
-/* Firefox */
-input[type='number'] {
-	-moz-appearance: textfield;
+option {
+	@apply bg-neutral-200 
+	text-neutral-900
+	dark:bg-neutral-800 
+	dark:text-neutral-200;
 }
 
 .hover-link {

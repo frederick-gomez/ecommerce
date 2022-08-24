@@ -1,11 +1,11 @@
-import React, { useRef, useState, ChangeEvent } from 'react';
+import { useRef, useState, ChangeEvent, useEffect } from 'react';
 import Image from 'next/image';
-import MinusSVG from '../icons/MinusSVG';
-import PlusSVG from '../icons/PlusSVG';
 import TrashSVG from '../icons/TrashSVG';
 import formatPriceTag from '../../utils/formatPriceTag';
 
 type Props = {
+	cartId: string;
+	amount: number;
 	product: {
 		title: string;
 		price: number;
@@ -16,16 +16,27 @@ type Props = {
 	};
 };
 
-const CartItem = ({ product }: Props) => {
-	const inputRef = useRef<HTMLInputElement>(null);
-	const [quantity, setQuantity] = useState(1);
+const CartItem = ({ product, amount, cartId }: Props) => {
+	const quantityRef = useRef<HTMLSelectElement>(null);
+	const [quantity, setQuantity] = useState(amount);
 
-	const addOne = () => setQuantity((prevState) => prevState + 1);
-	const substractOne = () => {
-		if (quantity === 1) return;
-		setQuantity((prevState) => prevState - 1);
+	const updateQuantityHandler = async () => {
+		setQuantity(+quantityRef.current!.value);
+
+		const response = await fetch('/api/update-quantity', {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				quantity: +quantityRef.current!.value,
+				cartId,
+				productId: product.id,
+			}),
+		});
+		const data = await response.json();
+		console.log(data);
 	};
-	const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setQuantity(+e.target.value);
 
 	const removeFromCart = async (productId: string) => {
 		const response = await fetch('/api/delete-from-cart', {
@@ -50,21 +61,28 @@ const CartItem = ({ product }: Props) => {
 				<p className='py-1'>
 					Precio: <span className='font-semibold'>{formatPriceTag(product.price)}</span>
 				</p>
-				<div className='mt-2 flex'>
-					<div className='relative mr-2 flex min-w-[120px] content-center justify-center self-stretch rounded-sm bg-neutral-200 px-2 dark:bg-neutral-800'>
-						<button className='absolute left-0 h-full pl-3' onClick={substractOne}>
-							<MinusSVG />
-						</button>
-						<input
-							ref={inputRef}
+				<div className='flex'>
+					<label htmlFor='quantity'>Cantidad:</label>
+					<div className='mx-2 rounded-sm bg-neutral-200 dark:bg-neutral-800'>
+						<select
+							ref={quantityRef}
 							value={quantity}
-							onChange={inputChangeHandler}
-							type='number'
-							className='w-16 bg-neutral-200 py-1 text-center dark:bg-neutral-800'
-						/>
-						<button className='absolute right-0 h-full pr-3' onClick={addOne}>
-							<PlusSVG />
-						</button>
+							onChange={updateQuantityHandler}
+							name='quantity'
+							id='quantity'
+							className='px-1'
+						>
+							<option value={1}>1</option>
+							<option value={2}>2</option>
+							<option value={3}>3</option>
+							<option value={4}>4</option>
+							<option value={5}>5</option>
+							<option value={6}>6</option>
+							<option value={7}>7</option>
+							<option value={8}>8</option>
+							<option value={9}>9</option>
+							<option value={10}>10</option>
+						</select>
 					</div>
 					<button
 						onClick={() => removeFromCart(product.id)}
