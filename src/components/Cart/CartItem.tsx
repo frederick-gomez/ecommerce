@@ -27,10 +27,8 @@ const CartItem = ({ product }: Props) => {
 	};
 	const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setQuantity(+e.target.value);
 
-	const addToCartHandler = () => {};
-
 	const removeFromCart = async (productId: string) => {
-		const response = await fetch('http://localhost:3000/api/delete-from-cart', {
+		const response = await fetch('/api/delete-from-cart', {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',

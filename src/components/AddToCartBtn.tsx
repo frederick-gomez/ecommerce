@@ -11,7 +11,7 @@ const AddToCartBtn = ({ productId }: Props) => {
 	const addToCartHandler = async (id: String) => {
 		try {
 			setIsLoading(true);
-			const response = await fetch('http://localhost:3000/api/add-to-cart', {
+			const response = await fetch(`/api/add-to-cart`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
