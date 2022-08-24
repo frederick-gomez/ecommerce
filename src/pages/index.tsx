@@ -30,8 +30,9 @@ const Home = ({ products }: Props) => {
 	return (
 		<>
 			<Head>
-				<title>E-commerce</title>
+				<title>Flame Shop</title>
 				<meta name='viewport' content='initial-scale=1.0, width=device-width' />
+				<link rel='shortcut icon' type='image/png' href='/favicon.png' />
 			</Head>
 			<main>
 				<Hero />
