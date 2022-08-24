@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import CartSVG from './icons/CartSVG';
 import LoadingSVG from './icons/LoadingSVG';
 type Props = {
@@ -6,9 +8,15 @@ type Props = {
 };
 
 const AddToCartBtn = ({ productId }: Props) => {
+	const router = useRouter();
+	const { data: session } = useSession();
 	const [isLoading, setIsLoading] = useState(false);
 
 	const addToCartHandler = async (id: String) => {
+		if (!session) {
+			return router.push('/auth/signin');
+		}
+
 		try {
 			setIsLoading(true);
 			const response = await fetch(`/api/add-to-cart`, {
