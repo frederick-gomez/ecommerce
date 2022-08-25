@@ -5,6 +5,18 @@ import ExpandSVG from './icons/ExpandSVG';
 import PreviewItem from './PreviewItem';
 import { productType } from '../types/types';
 import AddToCartBtn from './AddToCartBtn';
+import { motion } from 'framer-motion';
+
+const item = {
+	hidden: { opacity: 0, y: 50 },
+	show: {
+		opacity: 1,
+		y: 0,
+		transition: {
+			duration: 0.5,
+		},
+	},
+};
 
 const ProductItem = (props: productType) => {
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -14,7 +26,7 @@ const ProductItem = (props: productType) => {
 
 	return (
 		<>
-			<div className='relative flex flex-col justify-center text-center'>
+			<motion.div variants={item} className='relative flex flex-col justify-center text-center'>
 				<div className='absolute top-2 right-2 z-10'>
 					<button
 						onClick={openPreviewModal}
@@ -35,7 +47,7 @@ const ProductItem = (props: productType) => {
 				<p className='py-1 text-sm capitalize'>{props.category}</p>
 				<p className='pb-2'>{props.price}</p>
 				<AddToCartBtn productId={props.id} />
-			</div>
+			</motion.div>
 			{isPreviewOpen &&
 				createPortal(<PreviewItem {...props} closeModal={closePreviewModal} />, document.body)}
 		</>
