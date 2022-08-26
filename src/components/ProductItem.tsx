@@ -5,7 +5,7 @@ import ExpandSVG from './icons/ExpandSVG';
 import PreviewItem from './PreviewItem';
 import { productType } from '../types/types';
 import AddToCartBtn from './AddToCartBtn';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const item = {
 	hidden: { opacity: 0, y: 50 },
@@ -59,7 +59,7 @@ const ProductItem = (props: productType) => {
 						src={props.imageUrl}
 						layout='fill'
 						objectFit='cover'
-						className='transition-all duration-500 hover:scale-105'
+						className='cursor-pointer transition-all duration-500 hover:scale-105'
 					/>
 				</motion.div>
 				<p className='mt-2 truncate text-lg font-semibold capitalize'>{props.title}</p>
@@ -67,8 +67,9 @@ const ProductItem = (props: productType) => {
 				<p className='pb-2'>{props.price}</p>
 				<AddToCartBtn productId={props.id} />
 			</motion.div>
-			{isPreviewOpen &&
-				createPortal(<PreviewItem {...props} closeModal={closePreviewModal} />, document.body)}
+			<AnimatePresence>
+				{isPreviewOpen && <PreviewItem {...props} closeModal={closePreviewModal} />}
+			</AnimatePresence>
 		</>
 	);
 };
