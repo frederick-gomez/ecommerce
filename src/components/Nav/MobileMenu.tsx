@@ -1,20 +1,27 @@
-import Link from 'next/link';
 import React from 'react';
 import CartSVG from '../icons/CartSVG';
+import Link from 'next/link';
 import DarkModeToggle from './DarkModeToggle';
 import LoginBtn from './LoginBtn';
+import { motion } from 'framer-motion';
 
 type Props = {
-	isOpen: boolean;
 	closeMenu: () => void;
 };
 
 const linkClasses = 'text-center my-1 text-sm font-medium md:mx-4 md:my-0 hover-link';
 
-const Menu = ({ isOpen, closeMenu }: Props) => {
+const MobileMenu = ({ closeMenu }: Props) => {
 	return (
-		<div className={`mt-3 items-center md:mt-0 md:flex ${isOpen ? '' : 'hidden'}`}>
-			<div className='flex flex-col md:mx-2 md:flex-row'>
+		<motion.div
+			key='menu'
+			initial={{ height: 0 }}
+			animate={{ height: '' }}
+			exit={{ height: 0 }}
+			transition={{ duration: 0.4, ease: 'easeInOut' }}
+			className={'absolute top-full left-0 right-0 overflow-hidden bg-stone-100 dark:bg-black'}
+		>
+			<div className='flex flex-col'>
 				<Link href='/'>
 					<a onClick={closeMenu} className={linkClasses}>
 						Inicio
@@ -37,8 +44,7 @@ const Menu = ({ isOpen, closeMenu }: Props) => {
 				</Link>
 				<LoginBtn />
 			</div>
-
-			<div className='mt-1 flex justify-evenly md:mt-0'>
+			<div className='flex justify-evenly p-1 pb-4'>
 				<DarkModeToggle />
 
 				{/* Cart button */}
@@ -50,8 +56,8 @@ const Menu = ({ isOpen, closeMenu }: Props) => {
 					</Link>
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 
-export default Menu;
+export default MobileMenu;
