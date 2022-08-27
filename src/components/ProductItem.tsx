@@ -1,11 +1,11 @@
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import React, { useState } from 'react';
-import { createPortal } from 'react-dom';
+import Link from 'next/link';
+import { productType } from '../types/types';
 import ExpandSVG from './icons/ExpandSVG';
 import PreviewItem from './PreviewItem';
-import { productType } from '../types/types';
 import AddToCartBtn from './AddToCartBtn';
-import { AnimatePresence, motion } from 'framer-motion';
 
 const item = {
 	hidden: { opacity: 0, y: 50 },
@@ -55,14 +55,22 @@ const ProductItem = (props: productType) => {
 							<ExpandSVG />
 						</button>
 					</motion.div>
-					<Image
-						src={props.imageUrl}
-						layout='fill'
-						objectFit='cover'
-						className='cursor-pointer transition-all duration-500 hover:scale-105'
-					/>
+					<Link href={`/product/${props.id}`}>
+						<a>
+							<Image
+								src={props.imageUrl}
+								layout='fill'
+								objectFit='cover'
+								className='cursor-pointer transition-all duration-500 hover:scale-105'
+							/>
+						</a>
+					</Link>
 				</motion.div>
-				<p className='mt-2 truncate text-lg font-semibold capitalize'>{props.title}</p>
+				<Link href={`/product/${props.id}`}>
+					<a className='hover-link'>
+						<p className='mt-2 truncate text-lg font-semibold capitalize'>{props.title}</p>
+					</a>
+				</Link>
 				<p className='py-1 text-sm capitalize'>{props.category}</p>
 				<p className='pb-2'>{props.price}</p>
 				<AddToCartBtn productId={props.id} />

@@ -5,9 +5,10 @@ import CartSVG from './icons/CartSVG';
 import LoadingSVG from './icons/LoadingSVG';
 type Props = {
 	productId: String;
+	quantity?: Number;
 };
 
-const AddToCartBtn = ({ productId }: Props) => {
+const AddToCartBtn = ({ productId, quantity }: Props) => {
 	const router = useRouter();
 	const { data: session } = useSession();
 	const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +27,7 @@ const AddToCartBtn = ({ productId }: Props) => {
 				},
 				body: JSON.stringify({
 					id,
+					quantity,
 				}),
 			});
 			await response.json();

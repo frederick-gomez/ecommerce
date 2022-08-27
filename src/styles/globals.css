@@ -33,5 +33,5 @@ option {
 }
 
 .page-container {
-	@apply container mx-auto px-4 pt-16;
+	@apply container mx-auto px-4 pt-20;
 }

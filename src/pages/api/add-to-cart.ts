@@ -7,6 +7,7 @@ import { prisma } from '../../db/prisma';
 export default async function addToCartHandler(req: NextApiRequest, res: NextApiResponse) {
 	const session = await unstable_getServerSession(req, res, authOptions);
 	const productId: string = req.body.id;
+	const quantity: number = req.body.quantity;
 
 	if (!req.body.id) {
 		res.status(400).json({ message: 'please provide a valid id' });
@@ -30,7 +31,7 @@ export default async function addToCartHandler(req: NextApiRequest, res: NextApi
 								amount: { increment: 1 },
 							},
 							create: {
-								amount: 1,
+								amount: quantity || 1,
 								product: {
 									connect: {
 										id: productId,
