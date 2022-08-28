@@ -9,7 +9,9 @@ const ContactPage = (props: Props) => {
 			<Head>
 				<title>Contacto</title>
 			</Head>
-			<div className='page-container'>contact</div>
+			<div className='page-container'>
+				<h1 className='text-2xl font-semibold'>En construcción</h1>
+			</div>
 		</>
 	);
 };

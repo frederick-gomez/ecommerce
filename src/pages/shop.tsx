@@ -9,7 +9,9 @@ const ShopPage = (props: Props) => {
 			<Head>
 				<title>Tienda</title>
 			</Head>
-			<div className='page-container'>shop</div>
+			<div className='page-container'>
+				<h1 className='text-2xl font-semibold'>En construcción</h1>
+			</div>
 		</>
 	);
 };

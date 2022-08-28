@@ -25,12 +25,12 @@ export default function ProductPage({ product }: Props) {
 				<title>{product.title}</title>
 			</Head>
 			<div className='page-container'>
-				<div className='pt-6 pb-24 md:flex'>
-					<div className='relative mb-4 min-h-[450px]'>
-						<Image src={product.imageUrl} alt={product.title} layout='fill' objectFit='contain' />
+				<div className='pt-6 pb-24 md:flex md:items-center md:justify-center'>
+					<div className='relative mb-4 h-[450px] md:h-[550px] md:w-[350px]'>
+						<Image src={product.imageUrl} alt={product.title} layout='fill' objectFit='cover' />
 					</div>
 
-					<div className=''>
+					<div className='basis-1/2 md:pl-6'>
 						<h1 className='text-xl font-semibold capitalize'>{product.title}</h1>
 
 						<p className='py-2 text-sm'>
