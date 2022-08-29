@@ -6,7 +6,6 @@ import { authOptions } from './api/auth/[...nextauth]';
 import { prisma } from '../db/prisma';
 import Head from 'next/head';
 import createOrUpdateCart from '../lib/create-update-cart';
-import type { productType } from '../types/types';
 
 type Props = {
 	cart: {
@@ -14,7 +13,12 @@ type Props = {
 		_count: { items: number };
 		items: {
 			amount: number;
-			product: productType;
+			product: {
+				displayImg: string;
+				id: string;
+				title: string;
+				price: number;
+			};
 		}[];
 	};
 };
@@ -87,7 +91,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 				items: {
 					select: {
 						amount: true,
-						product: true,
+						product: {
+							select: {
+								id: true,
+								title: true,
+								price: true,
+								displayImg: true,
+							},
+						},
 					},
 				},
 				_count: true,
