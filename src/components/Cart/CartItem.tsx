@@ -1,19 +1,13 @@
-import { useRef, useState, ChangeEvent, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import TrashSVG from '../icons/TrashSVG';
 import formatPriceTag from '../../utils/formatPriceTag';
+import { productType } from '../../types/types';
 
 type Props = {
 	cartId: string;
 	amount: number;
-	product: {
-		title: string;
-		price: number;
-		imageUrl: string;
-		category: string;
-		vendor: string;
-		id: string;
-	};
+	product: productType;
 };
 
 const CartItem = ({ product, amount, cartId }: Props) => {
@@ -53,7 +47,7 @@ const CartItem = ({ product, amount, cartId }: Props) => {
 	return (
 		<div className='mb-4  flex p-2'>
 			<div className='relative h-[150px] w-[150px]'>
-				<Image src={product.imageUrl} layout='fill' objectFit='contain' />
+				<Image src={product.displayImg} layout='fill' objectFit='contain' />
 			</div>
 			<div className='ml-4 flex flex-col justify-center'>
 				<h1 className='capitalize md:text-lg'>{product.title}</h1>

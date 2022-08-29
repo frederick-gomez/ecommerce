@@ -3,9 +3,9 @@ import type { GetStaticProps, GetStaticPaths } from 'next';
 import type { productType } from '@/types/types';
 import { prisma } from '../../db/prisma';
 import formatPriceTag from '../../utils/formatPriceTag';
-import Image from 'next/image';
 import Head from 'next/head';
 import AddToCartBtn from '../../components/AddToCartBtn';
+import ImageCarousel from '../../components/ImageCarousel';
 
 type Props = {
 	product: productType;
@@ -26,10 +26,10 @@ export default function ProductPage({ product }: Props) {
 			</Head>
 			<div className='page-container'>
 				<div className='pt-6 pb-24 md:flex md:items-center md:justify-center'>
-					<div className='relative mb-4 h-[450px] md:h-[550px] md:w-[350px]'>
-						<Image src={product.displayImg} alt={product.title} layout='fill' objectFit='cover' />
-					</div>
-
+					<ImageCarousel
+						images={[product.displayImg, product.image1, product.image2, product.image3]}
+						title={product.title}
+					/>
 					<div className=' md:pl-6'>
 						<h1 className='text-xl font-semibold capitalize'>{product.title}</h1>
 

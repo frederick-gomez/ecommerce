@@ -6,6 +6,7 @@ import { authOptions } from './api/auth/[...nextauth]';
 import { prisma } from '../db/prisma';
 import Head from 'next/head';
 import createOrUpdateCart from '../lib/create-update-cart';
+import type { productType } from '../types/types';
 
 type Props = {
 	cart: {
@@ -13,14 +14,7 @@ type Props = {
 		_count: { items: number };
 		items: {
 			amount: number;
-			product: {
-				title: string;
-				price: number;
-				imageUrl: string;
-				category: string;
-				vendor: string;
-				id: string;
-			};
+			product: productType;
 		}[];
 	};
 };
@@ -44,7 +38,9 @@ const CartPage = ({ cart }: Props) => {
 			<div className='page-container min-h-[700px] py-16'>
 				<div className='mt-4 md:py-10'>
 					<h1 className='text-3xl font-semibold'>Mi Carrito</h1>
-					<span>{_count.items} articulos añadidos</span>
+					<span>
+						{_count.items} {_count.items > 1 ? 'articulos añadidos' : 'articulo añadido'}
+					</span>
 				</div>
 				{_count.items === 0 ? (
 					<div>
