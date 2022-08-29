@@ -49,7 +49,7 @@ const CartItem = ({ product, amount, cartId }: Props) => {
 	};
 
 	return (
-		<div className='mb-4  flex p-2'>
+		<li className='flex p-2 py-4'>
 			<div className='relative h-[200px] min-w-[150px]'>
 				<Image src={product.displayImg} layout='fill' objectFit='cover' />
 			</div>
@@ -89,7 +89,7 @@ const CartItem = ({ product, amount, cartId }: Props) => {
 					</button>
 				</div>
 			</div>
-		</div>
+		</li>
 	);
 };
 

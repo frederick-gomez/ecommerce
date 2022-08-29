@@ -31,7 +31,7 @@ const CartPage = ({ cart }: Props) => {
 
 	let totalPrice = 0;
 	for (let i = 0; i < items.length; i++) {
-		totalPrice = totalPrice + items[i].product.price;
+		totalPrice = totalPrice + items[i].product.price * items[i].amount;
 	}
 
 	return (
@@ -52,7 +52,7 @@ const CartPage = ({ cart }: Props) => {
 					</div>
 				) : (
 					<div className='md:flex md:items-end md:justify-evenly'>
-						<div className='mt-4 py-6 '>
+						<ul className='cart-list mt-4 divide-y py-6'>
 							{items.map((item) => (
 								<CartItem
 									product={item.product}
@@ -61,7 +61,7 @@ const CartPage = ({ cart }: Props) => {
 									key={item.product.id}
 								/>
 							))}
-						</div>
+						</ul>
 						<div className='pb-6 text-right'>
 							<h1 className='mb-2 text-2xl font-semibold'>Resumen</h1>
 							<p className='py-1'>
