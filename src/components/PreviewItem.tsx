@@ -33,12 +33,12 @@ const PreviewItem = (props: Props) => {
 					<Image src={props.displayImg} layout='fill' objectFit='contain' />
 				</div>
 				<div className='p-4 md:ml-2 md:min-w-[300px]'>
-					<p className='my-2 text-2xl font-semibold capitalize'>{props.title}</p>
+					<p className='text-2xl font-semibold capitalize'>{props.title}</p>
 					<p className='max-w-[400px] py-2 text-sm'>{props.description}</p>
-					<p className='py-1'>
+					<p className='pb-1'>
 						Precio: <span className='font-semibold'>{formatPriceTag(props.price)}</span>
 					</p>
-					<p className='py-1'>
+					<p className='pb-1'>
 						Marca: <span className='font-semibold capitalize'>{props.vendor}</span>
 					</p>
 					<div className='py-2'>
