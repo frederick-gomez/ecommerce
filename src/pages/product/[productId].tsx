@@ -27,15 +27,13 @@ export default function ProductPage({ product }: Props) {
 			<div className='page-container'>
 				<div className='pt-6 pb-24 md:flex md:items-center md:justify-center'>
 					<div className='relative mb-4 h-[450px] md:h-[550px] md:w-[350px]'>
-						<Image src={product.imageUrl} alt={product.title} layout='fill' objectFit='cover' />
+						<Image src={product.displayImg} alt={product.title} layout='fill' objectFit='cover' />
 					</div>
 
-					<div className='basis-1/2 md:pl-6'>
+					<div className=' md:pl-6'>
 						<h1 className='text-xl font-semibold capitalize'>{product.title}</h1>
 
-						<p className='py-2 text-sm'>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, delectus?
-						</p>
+						<p className='max-w-[400px] py-2 text-sm'>{product.description}</p>
 
 						<p className='pb-2'>
 							Precio: <span className='font-semibold'>{formatPriceTag(+product.price)}</span>

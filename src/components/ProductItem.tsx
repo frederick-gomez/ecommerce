@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { productType } from '../types/types';
+import type { productType } from '../types/types';
+import formatPriceTag from '../utils/formatPriceTag';
 import ExpandSVG from './icons/ExpandSVG';
 import PreviewItem from './PreviewItem';
 import AddToCartBtn from './AddToCartBtn';
@@ -58,7 +59,7 @@ const ProductItem = (props: productType) => {
 					<Link href={`/product/${props.id}`}>
 						<a>
 							<Image
-								src={props.imageUrl}
+								src={props.displayImg}
 								layout='fill'
 								objectFit='cover'
 								className='cursor-pointer transition-all duration-500 hover:scale-105'
@@ -72,7 +73,7 @@ const ProductItem = (props: productType) => {
 					</a>
 				</Link>
 				<p className='py-1 text-sm capitalize'>{props.category}</p>
-				<p className='pb-2'>{props.price}</p>
+				<p className='pb-2'>{formatPriceTag(props.price)}</p>
 				<AddToCartBtn productId={props.id} />
 			</motion.div>
 			<AnimatePresence>

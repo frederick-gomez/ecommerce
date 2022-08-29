@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import CloseSVG from './icons/CloseSVG';
-import { productType } from '../types/types';
+import type { productType } from '../types/types';
 import AddToCartBtn from './AddToCartBtn';
 import { motion } from 'framer-motion';
+import formatPriceTag from '../utils/formatPriceTag';
 
 type Props = productType & {
 	closeModal: () => void;
@@ -29,12 +30,13 @@ const PreviewItem = (props: Props) => {
 					</button>
 				</div>
 				<div className=' relative h-[300px] w-[200px] sm:h-[550px] sm:w-[400px]'>
-					<Image src={props.imageUrl} layout='fill' objectFit='contain' />
+					<Image src={props.displayImg} layout='fill' objectFit='contain' />
 				</div>
-				<div className='p-4 md:ml-2'>
+				<div className='p-4 md:ml-2 md:min-w-[300px]'>
 					<p className='my-2 text-2xl font-semibold capitalize'>{props.title}</p>
+					<p className='max-w-[400px] py-2 text-sm'>{props.description}</p>
 					<p className='py-1'>
-						Precio: <span className='font-semibold'>{props.price}</span>
+						Precio: <span className='font-semibold'>{formatPriceTag(props.price)}</span>
 					</p>
 					<p className='py-1'>
 						Marca: <span className='font-semibold capitalize'>{props.vendor}</span>

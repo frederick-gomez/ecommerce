@@ -4,11 +4,11 @@ export type productType = {
 	id: string;
 	title: string;
 	category: string;
-	imageUrl: string;
+	description: string;
+	displayImg: string;
+	image1: string;
+	image2: string;
+	image3: string;
 	vendor: string;
-	price: string;
+	price: number;
 };
-
-// export const cartItem = Prisma.validator<Prisma.UserSelect>()({
-
-// });

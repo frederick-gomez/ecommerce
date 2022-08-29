@@ -14,8 +14,12 @@ model Product {
   title         String @db.VarChar(250)
   vendor        String?
   price         Int
-  imageUrl      String @db.VarChar(1000)
+  displayImg    String @db.VarChar(1000)
+  image1        String? @db.VarChar(1000)
+  image2        String? @db.VarChar(1000)
+  image3        String? @db.VarChar(1000)
   category      String
+  description   String
   cart          CartItem[]
 }
 
