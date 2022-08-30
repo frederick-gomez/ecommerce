@@ -1,11 +1,14 @@
-import CartItem from '../components/Cart/CartItem';
-import formatPriceTag from '../utils/formatPriceTag';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from './api/auth/[...nextauth]';
 import { prisma } from '../db/prisma';
 import Head from 'next/head';
+import CartItem from '../components/Cart/CartItem';
+import formatPriceTag from '../utils/formatPriceTag';
 import createOrUpdateCart from '../lib/create-update-cart';
+import PageLoadingSVG from '../components/icons/PageLoadingSVG';
 
 type Props = {
 	cart: {
@@ -28,6 +31,17 @@ const buttonClasses =
 
 const CartPage = ({ cart }: Props) => {
 	const { items, _count } = cart;
+	const [isRefreshing, setIsRefreshing] = useState(false);
+	const router = useRouter();
+
+	const refreshData = () => {
+		router.replace(router.asPath, undefined, { scroll: false });
+		setIsRefreshing(true);
+	};
+
+	useEffect(() => {
+		setIsRefreshing(false);
+	}, [cart]);
 
 	let totalPrice = 0;
 	for (let i = 0; i < items.length; i++) {
@@ -39,7 +53,12 @@ const CartPage = ({ cart }: Props) => {
 			<Head>
 				<title>Carrito</title>
 			</Head>
-			<div className='page-container min-h-[700px] py-16'>
+			<div className='page-container relative min-h-[700px] py-16'>
+				{isRefreshing && (
+					<div className='fixed top-24 right-7 rounded-full'>
+						<PageLoadingSVG className='h-16 w-16' />
+					</div>
+				)}
 				<div className='mt-4 md:py-10'>
 					<h1 className='text-3xl font-semibold'>Mi Carrito</h1>
 					<span>
@@ -55,6 +74,7 @@ const CartPage = ({ cart }: Props) => {
 						<ul className='cart-list mt-4 divide-y py-6'>
 							{items.map((item) => (
 								<CartItem
+									refreshData={refreshData}
 									product={item.product}
 									cartId={cart.id}
 									amount={item.amount}

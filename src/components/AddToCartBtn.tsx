@@ -43,7 +43,7 @@ const AddToCartBtn = ({ productId, quantity }: Props) => {
 			onClick={() => addToCartHandler(productId)}
 			className='flex items-center self-center border border-solid border-black py-3 px-6 uppercase transition-all duration-300 hover:bg-black hover:text-white dark:border-white dark:hover:bg-white dark:hover:text-black'
 		>
-			Agregar{isLoading ? <LoadingSVG className='ml-2' /> : <CartSVG className='ml-2' />}
+			Agregar{isLoading ? <LoadingSVG className='ml-2 h-5 w-5' /> : <CartSVG className='ml-2' />}
 		</button>
 	);
 };

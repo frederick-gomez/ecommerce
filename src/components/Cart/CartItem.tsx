@@ -4,6 +4,7 @@ import TrashSVG from '../icons/TrashSVG';
 import formatPriceTag from '../../utils/formatPriceTag';
 
 type Props = {
+	refreshData: () => void;
 	cartId: string;
 	amount: number;
 	product: {
@@ -14,38 +15,56 @@ type Props = {
 	};
 };
 
-const CartItem = ({ product, amount, cartId }: Props) => {
+const CartItem = ({ product, amount, cartId, refreshData }: Props) => {
 	const quantityRef = useRef<HTMLSelectElement>(null);
 	const [quantity, setQuantity] = useState(amount);
 
 	const updateQuantityHandler = async () => {
 		setQuantity(+quantityRef.current!.value);
 
-		const response = await fetch('/api/update-quantity', {
-			method: 'PATCH',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				quantity: +quantityRef.current!.value,
-				cartId,
-				productId: product.id,
-			}),
-		});
-		await response.json();
+		try {
+			const response = await fetch('/api/update-quantity', {
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					quantity: +quantityRef.current!.value,
+					cartId,
+					productId: product.id,
+				}),
+			});
+			if (response.ok) {
+				refreshData();
+				return await response.json();
+			} else {
+				throw new Error('Network response was not ok');
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const removeFromCart = async (productId: string) => {
-		const response = await fetch('/api/delete-from-cart', {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				id: productId,
-			}),
-		});
-		await response.json();
+		try {
+			const response = await fetch('/api/delete-from-cart', {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					id: productId,
+				}),
+			});
+			if (response.ok) {
+				refreshData();
+				return await response.json();
+			} else {
+				throw new Error('Network response was not ok');
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
