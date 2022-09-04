@@ -4,7 +4,7 @@ import ChevronDownSVG from '../components/icons/ChevronDownSVG';
 type Props = {
 	brands: string[];
 	categories: string[];
-	applyFilterHandler: () => void;
+	applyFilterHandler: (categories: string[], brands: string[]) => void;
 };
 
 const FilterBar = ({ brands, categories, applyFilterHandler }: Props) => {
@@ -21,7 +21,6 @@ const FilterBar = ({ brands, categories, applyFilterHandler }: Props) => {
 		} else {
 			updatedList.splice(categoryCheked.indexOf(event.target.value), 1);
 		}
-
 		setCategoryChecked(updatedList);
 	};
 
@@ -108,7 +107,7 @@ const FilterBar = ({ brands, categories, applyFilterHandler }: Props) => {
 			<button
 				className='ml-auto bg-black px-4 text-white transition-all duration-300 hover:bg-white  hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white'
 				onClick={() => {
-					applyFilterHandler();
+					applyFilterHandler(categoryCheked, brandChecked);
 					setIsCategoryOpen(false);
 					setIsBrandOpen(false);
 				}}
