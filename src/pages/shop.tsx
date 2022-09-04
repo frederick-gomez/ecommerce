@@ -14,7 +14,7 @@ const ShopPage = ({ products }: Props) => {
 	const [productsList, setProductsList] = useState(products);
 
 	const brands: string[] = [];
-	productsList.forEach((product) => {
+	products.forEach((product) => {
 		if (brands.includes(product.vendor)) {
 			return;
 		}
@@ -22,14 +22,34 @@ const ShopPage = ({ products }: Props) => {
 	});
 
 	const categories: string[] = [];
-	productsList.forEach((product) => {
+	products.forEach((product) => {
 		if (categories.includes(product.category)) {
 			return;
 		}
 		categories.push(product.category);
 	});
 
-	const applyFilterHandler = () => {};
+	const applyFilterHandler = (categories: string[], brands: string[]) => {
+		let updatedList: productType[] = products;
+
+		if (categories.length > 0) {
+			for (let i = 0; i < categories.length; i++) {
+				updatedList = updatedList.filter((product) => product.category === categories[i]);
+			}
+		}
+
+		if (brands.length > 0) {
+			for (let i = 0; i < brands.length; i++) {
+				updatedList = updatedList.filter((product) => product.vendor === brands[i]);
+			}
+		}
+
+		if (updatedList.length > 0) {
+			setProductsList(updatedList);
+		} else {
+			setProductsList(products);
+		}
+	};
 
 	return (
 		<>
