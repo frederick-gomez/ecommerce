@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import ChevronDownSVG from '../components/icons/ChevronDownSVG';
 import TrashSVG from './icons/TrashSVG';
 
@@ -85,12 +86,15 @@ const FilterBar = ({ brands, categories, applyFilterHandler, resetFiltersHandler
 					>
 						Marca <ChevronDownSVG className='ml-2' />
 					</button>
-					<div
-						className={`absolute top-7 left-0 right-0 rounded bg-white p-2 ${
-							isBrandOpen ? '' : 'hidden'
-						}`}
+					<motion.div
+						initial={{ height: 0 }}
+						animate={{
+							height: isBrandOpen ? '' : 0,
+						}}
+						transition={{ ease: 'easeInOut' }}
+						className='absolute top-7 left-0 right-0 overflow-hidden rounded bg-white'
 					>
-						<fieldset>
+						<fieldset className='p-2'>
 							{brands.map((brand) => {
 								return (
 									<div key={brand} className='dark:text-black'>
@@ -109,9 +113,8 @@ const FilterBar = ({ brands, categories, applyFilterHandler, resetFiltersHandler
 								);
 							})}
 						</fieldset>
-					</div>
+					</motion.div>
 				</div>
-
 				<div className='relative mr-2'>
 					<button
 						className='hover-link flex cursor-pointer rounded bg-white py-2 px-2 text-sm dark:text-black md:px-4'
@@ -119,12 +122,15 @@ const FilterBar = ({ brands, categories, applyFilterHandler, resetFiltersHandler
 					>
 						Categoría <ChevronDownSVG className='ml-2' />
 					</button>
-					<div
-						className={`absolute top-7 left-0 right-0 rounded bg-white p-2 ${
-							isCategoryOpen ? '' : 'hidden'
-						}`}
+					<motion.div
+						initial={{ height: 0 }}
+						animate={{
+							height: isCategoryOpen ? '' : 0,
+						}}
+						transition={{ ease: 'easeInOut' }}
+						className='absolute top-7 left-0 right-0 overflow-hidden rounded bg-white'
 					>
-						<fieldset>
+						<fieldset className='p-2'>
 							{categories.map((category) => {
 								return (
 									<div key={category} className='dark:text-black'>
@@ -143,7 +149,7 @@ const FilterBar = ({ brands, categories, applyFilterHandler, resetFiltersHandler
 								);
 							})}
 						</fieldset>
-					</div>
+					</motion.div>
 				</div>
 			</div>
 		</div>
