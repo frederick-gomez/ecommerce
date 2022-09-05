@@ -30,7 +30,7 @@ const ShopPage = ({ products }: Props) => {
 	});
 
 	const applyFilterHandler = (categories: string[], brands: string[]) => {
-		let updatedList: productType[] = products;
+		let updatedList = products;
 
 		if (categories.length > 0) {
 			for (let i = 0; i < categories.length; i++) {
@@ -51,6 +51,8 @@ const ShopPage = ({ products }: Props) => {
 		}
 	};
 
+	const resetFiltersHandler = () => setProductsList(products);
+
 	return (
 		<>
 			<Head>
@@ -61,6 +63,7 @@ const ShopPage = ({ products }: Props) => {
 					brands={brands}
 					categories={categories}
 					applyFilterHandler={applyFilterHandler}
+					resetFiltersHandler={resetFiltersHandler}
 				/>
 				<section className='mb-32 grid grid-cols-2 gap-x-4 gap-y-14 md:grid-cols-3 lg:grid-cols-4'>
 					{productsList.map((product) => {
